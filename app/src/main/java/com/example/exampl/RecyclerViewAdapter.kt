@@ -8,7 +8,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 
-class RecyclerViewAdapter(val tasks: List<Task>,val listener:Listener)
+class RecyclerViewAdapter(
+    val tasks: List<Task>,
+private val listener: OnItemClickListener)
     : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>(){
 
     private lateinit var model: TaskViewModel
@@ -38,18 +40,23 @@ class RecyclerViewAdapter(val tasks: List<Task>,val listener:Listener)
         return super.getItemViewType(position)
     }
 
-    class ViewHolder(itemView:View): RecyclerView.ViewHolder(itemView){
-        val id:TextView = itemView.findViewById(R.id.tvId)
-        val name:TextView = itemView.findViewById(R.id.tvName)
-        val btn_delete:ImageButton = itemView.findViewById(R.id.btn_delete)
-        val btn_edit:ImageButton = itemView.findViewById(R.id.btn_edit)
-        //-----------------------Слушатель нажатий---------------------
-        val item = itemView.setOnClickListener {  }
+    inner class ViewHolder(itemView:View): RecyclerView.ViewHolder(itemView),
+    View.OnClickListener{
+        val id: TextView = itemView.findViewById(R.id.tvId)
+        val name: TextView = itemView.findViewById(R.id.tvName)
+
+        init {
+            itemView.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View?) {
+            val position = adapterPosition
+            if (position != RecyclerView.NO_POSITION){
+            listener.onItemClick(position)}
+        }
 
     }
-    //-----------------------Интерфейс слушателя нажатий---------------------
-    interface Listener{
-        fun onClick(task: Task)
+    interface OnItemClickListener{
+        fun onItemClick(position: Int)
     }
-
 }

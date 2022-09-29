@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -16,7 +17,7 @@ import java.util.*
 import androidx.fragment.app.DialogFragment
 
 
-class MainActivity : AppCompatActivity(),RecyclerViewAdapter.Listener {
+class MainActivity : AppCompatActivity(),RecyclerViewAdapter.OnItemClickListener {
 
     private lateinit var model: TaskViewModel
 
@@ -36,7 +37,7 @@ class MainActivity : AppCompatActivity(),RecyclerViewAdapter.Listener {
         // Observe the model
         model.allTasks.observe(this, Observer{ students->
             // Data bind the recycler view
-            recyclerView.adapter = RecyclerViewAdapter(students, listener = this)
+            recyclerView.adapter = RecyclerViewAdapter(students,this)
         })
 
         // Кнопка добавления задания
@@ -48,8 +49,9 @@ class MainActivity : AppCompatActivity(),RecyclerViewAdapter.Listener {
                         }
                      }
 
-    override fun onClick(task: Task) {
-        TODO("Not yet implemented")
+    override fun onItemClick(position: Int) {
+        Toast.makeText(this,"Пункт $position нажат", Toast.LENGTH_LONG).show()
     }
+
 
 }
