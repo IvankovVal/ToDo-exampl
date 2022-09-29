@@ -1,16 +1,22 @@
 package com.example.exampl
 
+import android.app.ProgressDialog.show
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageButton
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import java.util.*
+import androidx.fragment.app.DialogFragment
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),RecyclerViewAdapter.Listener {
 
     private lateinit var model: TaskViewModel
 
@@ -30,15 +36,20 @@ class MainActivity : AppCompatActivity() {
         // Observe the model
         model.allTasks.observe(this, Observer{ students->
             // Data bind the recycler view
-            recyclerView.adapter = RecyclerViewAdapter(students)
+            recyclerView.adapter = RecyclerViewAdapter(students, listener = this)
         })
 
         // Кнопка добавления задания
         val btn:Button = findViewById(R.id.btn)
         btn.setOnClickListener {
-//             {
-                model.insert(Task(null, UUID.randomUUID().toString()))
-//            }
-        }
+       val add_dialog = AddTaskDialog()
+            val manager = supportFragmentManager
+            add_dialog.show(manager,"add_dialog")
+                        }
+                     }
+
+    override fun onClick(task: Task) {
+        TODO("Not yet implemented")
     }
+
 }

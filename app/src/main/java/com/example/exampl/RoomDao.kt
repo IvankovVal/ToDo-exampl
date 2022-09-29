@@ -1,10 +1,7 @@
 package com.example.exampl
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
 interface TaskDao{
@@ -13,4 +10,10 @@ interface TaskDao{
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(task: Task)
+
+    @Delete()
+    fun delete_task(task: Task)
+
+//    @Delete(entity = Task::class)
+//    fun delete_task(task: Task)
 }
