@@ -51,6 +51,9 @@ class MainActivity : AppCompatActivity(),RecyclerViewAdapter.OnItemClickListener
 
     override fun onItemClick(position: Int) {
         Toast.makeText(this,"Пункт $position нажат", Toast.LENGTH_LONG).show()
+        val ditaile_dialog = DitaileDialog()
+        val manager = supportFragmentManager
+        ditaile_dialog.show(manager,"add_dialog")
     }
 
 
