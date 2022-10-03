@@ -14,8 +14,9 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class DetailsDialog(var itemPosition: Int): DialogFragment() {
+class DetailsDialog(var itemPosition: Int): BottomSheetDialogFragment() {
 
     private lateinit var model: TaskViewModel
     override fun onCreateView(
