@@ -14,6 +14,9 @@ interface TaskDao{
     @Delete()
     fun delete_task(task: Task)
 
+    @Update()
+    fun update_task(task: Task)
+
 //    @Delete(entity = Task::class)
 //    fun delete_task(task: Task)
 }

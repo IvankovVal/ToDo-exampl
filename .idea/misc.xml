@@ -6,6 +6,10 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.31302083333333336" />
         <entry key="app/src/main/res/layout/add_dialog.xml" value="0.2861111111111111" />
         <entry key="app/src/main/res/layout/custom_view.xml" value="0.31197916666666664" />
+        <entry key="app/src/main/res/layout/detaile_dialog.xml" value="0.31302083333333336" />
+        <entry key="app/src/main/res/layout/detale_dialog.xml" value="0.31197916666666664" />
+        <entry key="app/src/main/res/layout/ditaile_dialog.xml" value="0.3071794871794872" />
+        <entry key="app/src/main/res/layout/edit_dialog.xml" value="0.31197916666666664" />
       </map>
     </option>
   </component>

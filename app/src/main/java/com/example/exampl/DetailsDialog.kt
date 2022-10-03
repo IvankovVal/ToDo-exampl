@@ -7,10 +7,15 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.RecyclerView
 
-class DitaileDialog: DialogFragment() {
+class DetailsDialog(var itemPosition: Int): DialogFragment() {
 
     private lateinit var model: TaskViewModel
     override fun onCreateView(
@@ -22,7 +27,7 @@ class DitaileDialog: DialogFragment() {
         val btn_delete: ImageButton = view.findViewById(R.id.btn_delete)
         val btn_edit: ImageButton = view.findViewById(R.id.btn_edit)
         val btn_cancel: Button = view.findViewById(R.id.btn_cancel)
-        model = ViewModelProviders.of(this).get(TaskViewModel::class.java)
+        model = ViewModelProviders.of(requireActivity()).get(TaskViewModel::class.java)
 
         //Кнопка выключения диалога
         btn_cancel.setOnClickListener {
@@ -30,12 +35,19 @@ class DitaileDialog: DialogFragment() {
         }
 
         btn_delete.setOnClickListener {
-//            model.delete_task(task = )
+
+            model.delete_task(task = model.allTasks.value!![itemPosition])
             dialog?.cancel()
         }
 
         btn_edit.setOnClickListener {
-//            model.delete_task(task = )
+            Toast.makeText(context,"Редактировать", Toast.LENGTH_LONG).show()
+            val update_dialog = EditDialog(itemPosition)
+            val manager = (context as FragmentActivity).supportFragmentManager
+            update_dialog.show(manager,"update_dialog")
+
+            //val fragmentTransaction = FragmentActivity.
+            //update_dialog.replace( ,"update_dialog")
             dialog?.cancel()
         }
 
