@@ -26,7 +26,7 @@ class DetailsDialog(var itemPosition: Int): DialogFragment() {
         val view: View = inflater.inflate(R.layout.detaile_dialog,container,false)
         val btn_delete: ImageButton = view.findViewById(R.id.btn_delete)
         val btn_edit: ImageButton = view.findViewById(R.id.btn_edit)
-        val btn_cancel: Button = view.findViewById(R.id.btn_cancel)
+        val btn_cancel: ImageButton = view.findViewById(R.id.btn_cancel)
         model = ViewModelProviders.of(requireActivity()).get(TaskViewModel::class.java)
 
         //Кнопка выключения диалога
