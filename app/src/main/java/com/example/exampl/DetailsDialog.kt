@@ -36,7 +36,8 @@ class DetailsDialog(var itemPosition: Int): BottomSheetDialogFragment() {
         //положили в переменную конкретный пункт списка с которым будем работать
         val task = model.allTasks.value!![itemPosition]
 
-        //binding?.etNametaskDetails?.text = task.name.length.toString()
+
+        binding?.etNametaskDetails?.setText("${task.name}")
 
         //Кнопка выключения диалога
         binding?.btnCancel?.setOnClickListener {
