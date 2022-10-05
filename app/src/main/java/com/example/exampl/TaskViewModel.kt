@@ -10,27 +10,25 @@ import kotlinx.coroutines.launch
 
 
 class TaskViewModel(application:Application): AndroidViewModel(application){
-    private val db:RoomSingleton = RoomSingleton.getInstance(application)
-    internal val allTasks : LiveData<List<Task>> = db.taskDao().allTasks()
 
-   // private val tasks: MutableLiveData<List<Task>> = MutableLiveData(listOf())
+
+    private val tasks: MutableLiveData<List<Task>> = MutableLiveData(listOf(Task(1,"First",false)))
 
     fun insert(task:Task){
         viewModelScope.launch(Dispatchers.IO) {
-            db.taskDao().insert(task)
-           // tasks.value = tasks.value!!.plus(task)
+             tasks.value = tasks.value!!.plus(task)
         }
     }
 
     fun delete_task (task:Task){
         viewModelScope.launch(Dispatchers.IO) {
-            db.taskDao().delete_task(task)
+            //tasks.value = tasks.value!!.
         }
     }
 
     fun update_task (task:Task){
         viewModelScope.launch(Dispatchers.IO) {
-            db.taskDao().update_task(task)
+            //db.taskDao().update_task(task)
         }
     }
 }
