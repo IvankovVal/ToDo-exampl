@@ -40,6 +40,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             tools:text="Задание"
+            android:inputType="text"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:layout_marginTop="4dp"

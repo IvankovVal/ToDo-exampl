@@ -33,7 +33,10 @@ class DetailsDialog(var itemPosition: Int): BottomSheetDialogFragment() {
 
         model = ViewModelProviders.of(requireActivity()).get(TaskViewModel::class.java)
 
-        //binding?.etNametaskDetails?.text = model.allTasks.value!![itemPosition].name.toString()
+        //положили в переменную конкретный пункт списка с которым будем работать
+        val task = model.allTasks.value!![itemPosition]
+
+        //binding?.etNametaskDetails?.text = task.name.length.toString()
 
         //Кнопка выключения диалога
         binding?.btnCancel?.setOnClickListener {
@@ -41,15 +44,13 @@ class DetailsDialog(var itemPosition: Int): BottomSheetDialogFragment() {
         }
 
         binding?.btnDelete?.setOnClickListener {
-            val task = model.allTasks.value!![itemPosition]
+
             model.delete_task(task = task)
             dialog?.cancel()
         }
 
         binding?.btnEdit?.setOnClickListener {
 
-            //положили в переменную конкретный пункт списка с которым будем работать
-            val task = model.allTasks.value!![itemPosition]
             //в таск кладём id этого task и имя задачи из edittext
             model.update_task(task = Task(task.id, binding?.etNametaskDetails?.text.toString()))
 
