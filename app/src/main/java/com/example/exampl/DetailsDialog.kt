@@ -14,9 +14,12 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
+import com.example.exampl.databinding.DetaileDialogBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class DetailsDialog(var itemPosition: Int): BottomSheetDialogFragment() {
+
+    private var binding:DetaileDialogBinding? = null
 
     private lateinit var model: TaskViewModel
     override fun onCreateView(
@@ -24,35 +27,36 @@ class DetailsDialog(var itemPosition: Int): BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view: View = inflater.inflate(R.layout.detaile_dialog,container,false)
-        val btn_delete: ImageButton = view.findViewById(R.id.btn_delete)
-        val btn_edit: ImageButton = view.findViewById(R.id.btn_edit)
-        val btn_cancel: ImageButton = view.findViewById(R.id.btn_cancel)
+
+        binding = DetaileDialogBinding.inflate(inflater,container,false)
+
+
         model = ViewModelProviders.of(requireActivity()).get(TaskViewModel::class.java)
 
+        //binding?.etNametaskDetails?.text = model.allTasks.value!![itemPosition].name.toString()
+
         //Кнопка выключения диалога
-        btn_cancel.setOnClickListener {
+        binding?.btnCancel?.setOnClickListener {
             dialog?.cancel()
         }
 
-        btn_delete.setOnClickListener {
-
-            model.delete_task(task = model.allTasks.value!![itemPosition])
+        binding?.btnDelete?.setOnClickListener {
+            val task = model.allTasks.value!![itemPosition]
+            model.delete_task(task = task)
             dialog?.cancel()
         }
 
-        btn_edit.setOnClickListener {
-            Toast.makeText(context,"Редактировать", Toast.LENGTH_LONG).show()
-            val update_dialog = EditDialog(itemPosition)
-            val manager = (context as FragmentActivity).supportFragmentManager
-            update_dialog.show(manager,"update_dialog")
+        binding?.btnEdit?.setOnClickListener {
 
-            //val fragmentTransaction = FragmentActivity.
-            //update_dialog.replace( ,"update_dialog")
+            //положили в переменную конкретный пункт списка с которым будем работать
+            val task = model.allTasks.value!![itemPosition]
+            //в таск кладём id этого task и имя задачи из edittext
+            model.update_task(task = Task(task.id, binding?.etNametaskDetails?.text.toString()))
+
             dialog?.cancel()
         }
 
 
-        return view
+        return binding?.root
     }
 }

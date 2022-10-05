@@ -3,6 +3,7 @@ package com.example.exampl
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -44,6 +45,7 @@ private val listener: OnItemClickListener)
     View.OnClickListener{
         val id: TextView = itemView.findViewById(R.id.tvId)
         val name: TextView = itemView.findViewById(R.id.tvName)
+        //val chekbox: CheckBox = itemView.findViewById(R.id.cbStatus)
 
         init {
             itemView.setOnClickListener(this)
